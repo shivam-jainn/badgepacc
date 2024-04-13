@@ -73,3 +73,18 @@
       @apply bg-background text-foreground;
     }
   }
+
+  .bg-gradient-anim-auth {
+    background: linear-gradient(rgba(150, 41, 200, 0), rgba(150, 41, 200, 1));
+    background-size: 100% 200%; /* Double the height to ensure full transition */
+    animation: AnimationName 2s linear;
+}
+
+@keyframes AnimationName {
+    0% { background-position: 100% 100%; }
+    100% { background-position: 100% 50%; }
+}
+
+
+
+

@@ -7,23 +7,28 @@ import { FaGoogle } from "react-icons/fa";
 import { Button } from '@/components/ui/button';
 export default function page() {
   return (
-    <Card className=' flex-col bg-[#6F6F6F]/40 max-w-sm flex items-center p-8'>
-        <div className='p-4 flex items-center align-middle rounded-[1000px] bg-white w-[80px] h-[80px]'>
-        <DoorOpen className='w-full' />
+   
+  <div className='flex items-center align-middle w-screen h-screen  '>
+   <Card className=' flex-col gap-3  bg-[#6F6F6F]/40 max-w-sm  m-auto flex  p-3 border-none'>
+        <div className='my-2 p-2 flex items-center align-middle rounded-[1000px] bg-white w-[40px] h-[40px]'>
+        <DoorOpen className='w-full text-black' />
         </div>
 
         <div>
-            <h1>Welcome to Badgepacc</h1>
-            <h3>Please sign in or sign up</h3>
+            <h1 className='text-white font-bold text-xl'>Welcome to Badgepacc</h1>
+            <h3 className='text-white'>Please sign in or sign up</h3>
         </div>
 
         <div>
-            <Button onClick={()=>{
+            <Button
+            className='w-full'
+            onClick={()=>{
                 signIn('google');
             }}>
                 <FaGoogle />
             </Button>
         </div>
     </Card>
+  </div>
 )
 }
