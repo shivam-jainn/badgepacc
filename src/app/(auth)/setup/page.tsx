@@ -44,9 +44,9 @@ export default function Page() {
 
     return (
         <div className='flex items-center justify-center w-screen h-screen'>
-            <Card className='flex-col gap-3 bg-[#6F6F6F]/40 max-w-sm flex m-auto p-8'>
+            <Card className='flex-col gap-3 bg-[#6F6F6F]/40 max-w-sm flex m-auto p-8 border-none'>
                 <div className='p-2 flex items-center justify-center rounded-full bg-white w-12 h-12'>
-                    <DoorOpen className='w-full' />
+                    <DoorOpen className='w-full text-black  ' />
                 </div>
 
                 <div>
