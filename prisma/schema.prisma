@@ -71,6 +71,7 @@ model Badge {
   creator          User     @relation(fields: [creatorId], references: [id])
   creatorId        String
   tokens           Tokens[]
+  claimLink       ClaimLink[]
 }
 
 model Tokens {
@@ -92,4 +93,11 @@ model Socials {
   gitlab  String?
   github  String?
   discord String?
+}
+
+model ClaimLink{
+  id String @id @default(cuid())
+  link String 
+  badge         Badge    @relation(fields: [badge_id], references: [id])
+  badge_id      String
 }
