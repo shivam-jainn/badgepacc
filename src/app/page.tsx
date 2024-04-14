@@ -2,7 +2,6 @@
 import Landing from '@/components/pages/Landing';
 import { authOptions } from '@/lib/auth/auth';
 import { Separator } from '@/components/ui/separator';
-import { getServerSession } from 'next-auth';
 
 import { useParams } from 'next/navigation';
 
@@ -20,31 +19,39 @@ export default async function Home() {
     {
       name : "Pricing",
       link : "/pricing"
+    },
+        {
+      name : "API",
+      link : "/api"
     }
   ];
 
   const router = useRouter();
 
   return (
-    <section className='py-4 px-8 flex flex-col bg-bgroot text-white'>
-      <div className='flex'>
-        <div className='flex flex-col items-center'>
+    <section className='py-4 px-8 flex flex-col bg-bgroot text-white h-full gap-4'>
+      <div className='flex align-middle px-8 justify-between'>
+        <div className='flex flex-col gap-4 justify-between py-8'>
 
-          <div>
-          <h1>Badgepacc</h1>
-          <h2>Your collections starts here</h2>
-          <h4>Create & Collect Badges . Make anything rewarding with badgepacc .</h4>
+          <div className='flex flex-col gap-8'> 
+          <h1 className='text-5xl font-bold'>Badgepacc</h1>
+          <h2 className='text-7xl'>Your <br /> collections <br /> <span className='home-title-grad '>starts here</span></h2>
+          <h4 className='text-2xl'>Create & Collect Badges . Make anything rewarding with badgepacc .</h4>
 
-          <Button onClick={()=>{
+        
+
+          </div>
+        
+          <Button 
+          className='max-w-sm rounded-[3rem]'
+          onClick={()=>{
             router.push('/login')
           }}>
             Redeem your first badge
             </Button>
-
-          </div>
         </div>
 
-        <div className='flex flex-col'> 
+        <div className='flex flex-col items-center align-middle'> 
             <Image width={400} height={400} alt='A pic' src="/rightHomeLandingImg .png"/>   
         </div>
       </div>
@@ -54,14 +61,18 @@ export default async function Home() {
 
 {/* footer */}
       <footer className='flex'>
-        <div className='flex items-center p-4'>
+        <div className='flex items-center align-middle gap-3 p-4'>
 
-        <div>
+        <div className='text-xl font-bold'>
           Badgepacc
         </div>
         <div>
   {footerLinks.map(({link,name}) => (
-    <Button variant="link" key={link} onClick={()=>{
+    <Button 
+    variant="link" 
+    key={link}
+    className='text-white'
+    onClick={()=>{
       router.push(link);
     }}>
       {name}
