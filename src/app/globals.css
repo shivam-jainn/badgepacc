@@ -88,3 +88,12 @@
 
 
 
+
+
+.home-title-grad{
+  background: rgb(51,59,255);
+background: linear-gradient(31deg, rgba(51,59,255,1) 0%, rgba(225,50,254,1) 19%, rgba(238,46,57,1) 53%, rgba(131,55,255,1) 100%);
+background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
