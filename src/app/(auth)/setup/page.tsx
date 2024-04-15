@@ -23,12 +23,15 @@ export default function Page() {
 
     const [username, setUsername] = useState("");
     const [bio, setBio] = useState("");
+    const [isOrganisation, setIsOrganisation] = useState("");
+
 
     async function handleSubmit() {
         const url = "/api/user";
         const data = {
             username: username,
-            bio: bio
+            bio: bio,
+            isOrganisation : Boolean(isOrganisation)
         };
         try {
             const response = await axios.put(url, data);
@@ -75,15 +78,16 @@ export default function Page() {
                     </div>
 
                     <div>
-                        <Select>
-                            <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Orgnaisation" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="light">Yes</SelectItem>
-                                <SelectItem value="dark">No</SelectItem>
-                            </SelectContent>
-                        </Select>
+                    <Select onValueChange={setIsOrganisation}>
+    <SelectTrigger className="w-full">
+        <SelectValue placeholder="Orgnaisation" />
+    </SelectTrigger>
+    <SelectContent>
+        <SelectItem value={String(true)}>Yes</SelectItem>
+        <SelectItem value={String(false)}>No</SelectItem>
+    </SelectContent>
+</Select>
+
 
                     </div>
 

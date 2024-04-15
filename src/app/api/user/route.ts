@@ -5,11 +5,10 @@ export async function PUT(req: NextRequest, res: NextResponse) {
     try {
          const token = await getToken({req})
             console.log(token);
-            
+
         const request = await req.json();
         
-        const { username, name, bio } = request;
-        
+        const { username, name, bio, isOrganisation } = request;
         // Ensure user_id is provided
         if (!token) {
             return NextResponse.error();
@@ -23,7 +22,8 @@ export async function PUT(req: NextRequest, res: NextResponse) {
             data: {
                 username,
                 name,
-                bio
+                bio,
+                isOrganisation
             }
         });
 
