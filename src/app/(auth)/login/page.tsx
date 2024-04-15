@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 export default function page() {
   return (
    
-   <Card className=' flex-col gap-3  bg-[#6F6F6F]/40 max-w-sm  m-auto flex  p-3 border-none'>
+   <Card className=' flex-col gap-3  bg-[#6F6F6F]/20 max-w-sm  m-auto flex  p-3 border-none'>
         <div className='my-2 p-2 flex items-center align-middle rounded-[1000px] bg-white w-[40px] h-[40px]'>
         <DoorOpen className='w-full text-black' />
         </div>

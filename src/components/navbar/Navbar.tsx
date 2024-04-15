@@ -4,7 +4,7 @@ import { Button } from '../ui/button'
 import { MoveUpRight } from 'lucide-react'
 export default function Navbar() {
   return (
-    <nav className='flex justify-between  p-4 px-8'>
+    <nav className='flex justify-between p-4 px-8'>
         <div>
             <Image width={24} height={24} alt='badgepacc logo' src="/BagSmallLogo.svg" />
         </div>

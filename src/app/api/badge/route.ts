@@ -3,6 +3,87 @@ import prisma from "@/../prisma/prisma";
 import ResizeImg from "@/utils/resizeimg";
 import {UploadBadgeImage} from "@/lib/aws/UploadBadgeImage"
 
+/**
+ * @swagger
+ * /api/badge:
+ *   post:
+ *     summary: Create a new badge
+ *     description: Endpoint to create a new badge
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: The name of the badge
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *                 description: The image of the badge
+ *               description:
+ *                 type: string
+ *                 description: The description of the badge
+ *               creator:
+ *                 type: string
+ *                 description: The creator of the badge
+ *     responses:
+ *       '200':
+ *         description: Successful operation
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Indicates if the operation was successful
+ *   put:
+ *     summary: Update a badge
+ *     description: Endpoint to update a badge
+ *     parameters:
+ *       - in: query
+ *         name: badge_id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the badge to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: The updated name of the badge
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *                 description: The updated image of the badge
+ *               description:
+ *                 type: string
+ *                 description: The updated description of the badge
+ *               creator:
+ *                 type: string
+ *                 description: The updated creator of the badge
+ *     responses:
+ *       '200':
+ *         description: Successful operation
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Indicates if the operation was successful
+ */
+
+
 
 export async function POST(req:NextRequest,res:NextResponse)  {
     try {
