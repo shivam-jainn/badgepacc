@@ -22,7 +22,7 @@ export default async function Home() {
     },
         {
       name : "API",
-      link : "/api"
+      link : "/api-doc"
     }
   ];
 
