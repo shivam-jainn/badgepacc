@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/../prisma/prisma";
 import ResizeImg from "@/utils/resizeimg";
 import {UploadBadgeImage} from "@/lib/aws/UploadBadgeImage"
+import { getToken } from "next-auth/jwt";
 
 /**
  * @swagger
@@ -87,33 +88,50 @@ import {UploadBadgeImage} from "@/lib/aws/UploadBadgeImage"
 
 export async function POST(req:NextRequest,res:NextResponse)  {
     try {
-        const request = await req.json();
-        const body = request.body;
+        const form = await req.formData();
+        console.log(form);
         
-        const {name,image,description,creator} = body;
+        const token = await getToken({req});
+        const name = form.get("name") as string;
+        const description = form.get("description") as string;
+        const image = form.get('image')  as  File | null;;
+        const creator = token?.id
+        console.log(creator);
         
-        const resized_image = await ResizeImg(image);
 
+        if (!name || !description || !creator || !image) {
+            throw new Error('Invalid request parameters');
+        }
+        const imageBuffer = await image.arrayBuffer();
+        const resized_image = await ResizeImg(Buffer.from(imageBuffer));
+        console.log(resized_image);
+        
         const uploadUrl = await UploadBadgeImage(resized_image,creator,name);        
-
+        const currentDate = new Date();
+const isoDateString = currentDate.toISOString();
 
         const newBadge = await prisma.badge.create({
             data:{
                 name: name,
                 pic: uploadUrl as string,
                 description: description,
-                creator: creator,
+                creator: { connect: { id: creator } },
                 no_of_issued:0,
-                time_of_creation:Date(),
+                time_of_creation:isoDateString
             }
         });
         
+        console.log("new badge : " + newBadge);
+        
+
         const response = {
             success : true
         }
 
         return NextResponse.json(response);
     } catch (error) {
+        console.log("error"+error);
+        
         return NextResponse.error();
     }
 }

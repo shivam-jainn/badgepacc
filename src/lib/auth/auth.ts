@@ -45,6 +45,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.isOrganisation = Boolean(dbUser?.isOrganisation);
         token.username = dbUser?.username as string;
+        token.id = dbUser?.id as string;
       }
       return token;
     },
