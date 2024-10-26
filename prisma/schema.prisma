@@ -2,11 +2,11 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
- 
+
 generator client {
   provider = "prisma-client-js"
 }
- 
+
 model User {
   id            String          @id @default(cuid())
   name          String?
@@ -14,16 +14,22 @@ model User {
   emailVerified DateTime?
   image         String?
   isOrg         Boolean?
+  bio           String?
+  website       String?
+  banner        String?
   username      String?
   accounts      Account[]
   sessions      Session[]
-  // Optional for WebAuthn support
   Authenticator Authenticator[]
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  skills       String[]
+  badges         Badge[]
+  tokens         Tokens[]
 }
- 
+
 model Account {
   userId            String
   type              String
@@ -36,33 +42,33 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
- 
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@id([provider, providerAccountId])
 }
- 
+
 model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
- 
+
 model VerificationToken {
   identifier String
   token      String
   expires    DateTime
- 
+
   @@id([identifier, token])
 }
- 
+
 // Optional for WebAuthn support
 model Authenticator {
   credentialID         String  @unique
@@ -73,8 +79,33 @@ model Authenticator {
   credentialDeviceType String
   credentialBackedUp   Boolean
   transports           String?
- 
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@id([userId, credentialID])
+}
+
+
+model Badge {
+  id               String   @id @default(cuid())
+  name             String
+  pic              String
+  description      String
+  no_of_issued     Int
+  time_of_creation DateTime
+  creator          User     @relation(fields: [creator_email], references: [email])
+  creator_email    String
+  tokens           Tokens[]
+}
+
+model Tokens {
+  id            String   @id @default(cuid())
+  issuance_time DateTime
+  issuance_id   String    
+  user          User     @relation(fields: [user_email], references: [email])
+  user_email       String
+  badge         Badge   @relation(fields: [badge_id], references: [id])
+  badge_id      String
+
+  @@unique([user_email, badge_id]) 
 }

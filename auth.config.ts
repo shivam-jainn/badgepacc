@@ -18,10 +18,16 @@ export default {
         authorized({ request: { nextUrl }, auth }) {
           const isLoggedIn = !!auth?.user;
           const { pathname } = nextUrl;
-          const isOrg = auth?.user.isOrg || 'user';
+          const isOrg = auth?.user.isOrg;
+          console.log("logged in : ",isLoggedIn);
 
+          
           if (pathname.startsWith('/signin') && isLoggedIn) {
-              return Response.redirect(new URL('/', nextUrl));
+            if(isOrg === null){
+              return Response.redirect(new URL('/onboarding/username', nextUrl));
+            }
+
+            return Response.redirect(new URL('/', nextUrl));
           }
     
     
