@@ -1,8 +1,9 @@
 import '@mantine/core/styles.css';
-
 import React from 'react';
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import { theme } from '../theme';
+import {SessionProvider} from 'next-auth/react'
+import './globals.css';
 
 export const metadata = {
   title: 'Mantine Next.js template',
@@ -11,6 +12,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: any }) {
   return (
+    <SessionProvider>
     <html lang="en" suppressHydrationWarning>
       <head>
         <ColorSchemeScript />
@@ -24,5 +26,6 @@ export default function RootLayout({ children }: { children: any }) {
         <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>
     </html>
+    </SessionProvider>
   );
 }
