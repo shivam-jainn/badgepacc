@@ -17,7 +17,7 @@ model User {
   bio           String?
   website       String?
   banner        String?
-  username      String?
+  username      String?  @unique
   accounts      Account[]
   sessions      Session[]
   Authenticator Authenticator[]
