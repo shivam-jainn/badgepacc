@@ -12,7 +12,7 @@ export default function OnBoardingUsername() {
   const [loading, { open: startLoading, close: stopLoading }] = useDisclosure(false);
   const [error, setError] = useState<string>(''); // Specify type for error state
   const router = useRouter();
-  const {data:session} = useSession();
+  const {data:session,update} = useSession();
 
   const handleSubmit = async (): Promise<void> => {
     if (!username) return;
@@ -39,6 +39,16 @@ export default function OnBoardingUsername() {
       });
 
       if (!response.ok) throw new Error('Failed to update username');
+
+      const newSession = {
+        ...session,
+        user: {
+          ...session?.user,
+          username: username
+        },
+      };
+
+      await update(newSession);
 
       router.push('/onboarding/isorg');
     } catch (err) {

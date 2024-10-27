@@ -5,6 +5,7 @@ declare module "next-auth" {
     interface User {
         isOrg: boolean
         email: string
+        username: string
     }
     interface Session {
         user: User
@@ -16,5 +17,6 @@ declare module "next-auth/jwt" {
         id: string
         isOrg : boolean
         email : string
+        username: string
     }
 }

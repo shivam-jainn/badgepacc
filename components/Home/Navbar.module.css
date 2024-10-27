@@ -1,0 +1,14 @@
+.searchresult{
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color : white
+}
+
+.searchresult:hover {
+    background-color: rgb(56, 56, 56);
+    color: white;
+}
+
+.navbarBottomColor {
+    border-bottom: 1px solid rgb(61, 61, 61);
+}
