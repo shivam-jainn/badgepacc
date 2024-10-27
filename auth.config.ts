@@ -43,7 +43,7 @@ export default {
             token.isOrg = user.isOrg as boolean;
           }
           if (trigger === "update" && session) {
-            token = { ...token, ...session };
+            token = { ...token, ...session.user };
           }
     
           return token;

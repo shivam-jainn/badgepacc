@@ -12,7 +12,7 @@ export default function OnBoardingIsOrg() {
   const [loading, { open: startLoading, close: stopLoading }] = useDisclosure(false);
   const [error, setError] = useState<string>(''); // Specify type for error state
   const router = useRouter();
-  const {data:session} = useSession();
+  const {data:session,update} = useSession();
 
   const handleSubmit = async (): Promise<void> => {
     if (!isOrganisation) {
@@ -39,6 +39,16 @@ export default function OnBoardingIsOrg() {
       });
 
       if (!response.ok) throw new Error('Failed to update organization status');
+      
+      const newSession = {
+        ...session,
+        user: {
+          ...session?.user,
+          isOrg: isOrg
+        },
+      };
+
+      await update(newSession);
 
       router.push('/onboarding/bio');
     } catch (err) {
