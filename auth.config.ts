@@ -21,7 +21,10 @@ export default {
           const isOrg = auth?.user.isOrg;
           console.log("logged in : ",isLoggedIn);
 
-          
+          if (pathname.startsWith('/signup') && !isLoggedIn) {
+            return true;
+          }
+
           if (pathname.startsWith('/signin') && isLoggedIn) {
             if(isOrg === null){
               return Response.redirect(new URL('/onboarding/username', nextUrl));
@@ -44,6 +47,7 @@ export default {
           }
           if (trigger === "update" && session) {
             token = { ...token, ...session.user };
+            console.log(token)
           }
     
           return token;
@@ -51,6 +55,7 @@ export default {
         session({ session, token }) {
           session.user.id = token.id;
           session.user.isOrg = token.isOrg;
+          session.user.username = token.username;
           return session;
         }
       }
