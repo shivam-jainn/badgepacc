@@ -51,7 +51,7 @@ export async function POST(request: Request) {
   try {
     const { username, datapoints }: { username: string; datapoints: UserDataPoints } = await request.json();
 
-    const allowedFields: UserDataPoints = ['name', 'username', 'email', 'isOrganisation', 'bio', 'website', 'badges', 'tokens','image','skills','banner','socials'];
+    const allowedFields: UserDataPoints = ['name', 'username', 'email', 'isOrg', 'bio', 'website', 'badges', 'tokens','image','skills','banner','socials'];
     const selectedFields = (datapoints || []).filter((field) => allowedFields.includes(field));
 
     const selectOptions: Record<string, boolean> = {};
@@ -59,7 +59,7 @@ export async function POST(request: Request) {
       selectOptions[field] = true;
     });
 
-    const userDetails = await prisma.user.findUnique({
+    const userDetails = await prisma.user.findFirst({
       where: { username },
       select: selectOptions,
     });
