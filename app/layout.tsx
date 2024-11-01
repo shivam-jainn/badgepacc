@@ -5,6 +5,7 @@ import { theme } from '../theme';
 import {SessionProvider} from 'next-auth/react'
 import './globals.css';
 import Navbar from '@/components/Home/Navbar';
+import AtomsProvider from '@/atoms/AtomsProvider';
 
 export const metadata = {
   title: 'Mantine Next.js template',
@@ -24,10 +25,12 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
+    <AtomsProvider>
         <MantineProvider theme={theme}>
           <Navbar />
           {children}
         </MantineProvider>
+    </AtomsProvider>
       </body>
     </html>
     </SessionProvider>
